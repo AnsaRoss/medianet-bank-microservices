@@ -36,19 +36,24 @@ namespace CuentaMovimiento.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Movimiento>> Post(Movimiento movimiento)
         {
-            var cuenta = await _context.Cuentas.FindAsync(movimiento.CuentaId);
+            var cuenta = await _context.Cuentas.FindAsync(dto.CuentaId);
 
             if (cuenta == null)
                 return BadRequest("La cuenta no existe.");
 
-            var nuevoSaldo = cuenta.SaldoActual + movimiento.Valor;
+            var nuevoSaldo = cuenta.SaldoActual + dto.Valor;
 
             if (nuevoSaldo < 0)
                 return BadRequest("Saldo no disponible");
 
-            movimiento.Fecha = movimiento.Fecha == default ? DateTime.Now : movimiento.Fecha;
-            movimiento.TipoMovimiento = movimiento.Valor >= 0 ? "Deposito" : "Retiro";
-            movimiento.Saldo = nuevoSaldo;
+            var movimiento = new Movimiento
+            {
+                Fecha = DateTime.Now,
+                TipoMovimiento = dto.Valor >= 0 ? "Deposito" : "Retiro",
+                Valor = dto.Valor,
+                Saldo = nuevoSaldo,
+                CuentaId = dto.CuentaId
+            };
 
             cuenta.SaldoActual = nuevoSaldo;
 
@@ -56,32 +61,6 @@ namespace CuentaMovimiento.Api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(Get), new { id = movimiento.Id }, movimiento);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Movimiento movimiento)
-        {
-            if (id != movimiento.Id)
-                return BadRequest();
-
-            _context.Entry(movimiento).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var movimiento = await _context.Movimientos.FindAsync(id);
-
-            if (movimiento == null)
-                return NotFound();
-
-            _context.Movimientos.Remove(movimiento);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
     }
 }

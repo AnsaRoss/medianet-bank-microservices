@@ -2,6 +2,7 @@ using ClientePersona.Api.Data;
 using ClientePersona.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ClientePersona.Api.DTOs;
 
 namespace ClientePersona.Api.Controllers
 {
@@ -34,8 +35,29 @@ namespace ClientePersona.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cliente>> Post(Cliente cliente)
+        public async Task<ActionResult<Cliente>> Post(ClienteCreateDto dto)
         {
+            var ultimoCliente = await _context.Clientes
+                .OrderByDescending(c => c.Id)
+                .FirstOrDefaultAsync();
+
+            var siguienteNumero = ultimoCliente == null
+                ? 1
+                : ultimoCliente.Id + 1;
+
+            var cliente = new Cliente
+            {
+                ClienteId = $"CLI{siguienteNumero:D4}",
+                Nombre = dto.Nombre,
+                Genero = dto.Genero,
+                Edad = dto.Edad,
+                Identificacion = dto.Identificacion,
+                Direccion = dto.Direccion,
+                Telefono = dto.Telefono,
+                Contrasena = dto.Contrasena,
+                Estado = dto.Estado
+            };
+
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 
@@ -43,12 +65,22 @@ namespace ClientePersona.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Cliente cliente)
+        public async Task<IActionResult> Put(int id, ClienteUpdateDto dto)
         {
-            if (id != cliente.Id)
-                return BadRequest();
+            var cliente = await _context.Clientes.FindAsync(id);
 
-            _context.Entry(cliente).State = EntityState.Modified;
+            if (cliente == null)
+                return NotFound();
+
+            cliente.Nombre = dto.Nombre;
+            cliente.Genero = dto.Genero;
+            cliente.Edad = dto.Edad;
+            cliente.Identificacion = dto.Identificacion;
+            cliente.Direccion = dto.Direccion;
+            cliente.Telefono = dto.Telefono;
+            cliente.Contrasena = dto.Contrasena;
+            cliente.Estado = dto.Estado;
+
             await _context.SaveChangesAsync();
 
             return NoContent();

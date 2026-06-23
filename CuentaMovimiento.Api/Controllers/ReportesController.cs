@@ -26,8 +26,8 @@ namespace CuentaMovimiento.Api.Controllers
                 join m in _context.Movimientos
                     on c.Id equals m.CuentaId
                 where c.ClienteId == clienteId
-                    && m.Fecha >= fechaInicio
-                    && m.Fecha <= fechaFin
+                    && m.Fecha.Date >= fechaInicio.Date
+                    && m.Fecha.Date <= fechaFin.Date
                 select new
                 {
                     Fecha = m.Fecha,

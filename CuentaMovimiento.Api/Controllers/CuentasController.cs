@@ -1,4 +1,5 @@
 ﻿using CuentaMovimiento.Api.Data;
+using CuentaMovimiento.Api.DTOs;
 using CuentaMovimiento.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,17 @@ namespace CuentaMovimiento.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cuenta>> Post(Cuenta cuenta)
+        public async Task<ActionResult<Cuenta>> Post(CuentaCreateDto dto)
         {
-            cuenta.SaldoActual = cuenta.SaldoInicial;
+            var cuenta = new Cuenta
+            {
+                NumeroCuenta = dto.NumeroCuenta,
+                TipoCuenta = dto.TipoCuenta,
+                SaldoInicial = dto.SaldoInicial,
+                SaldoActual = dto.SaldoInicial,
+                Estado = dto.Estado,
+                ClienteId = dto.ClienteId
+            };
 
             _context.Cuentas.Add(cuenta);
             await _context.SaveChangesAsync();
@@ -45,12 +54,18 @@ namespace CuentaMovimiento.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Cuenta cuenta)
+        public async Task<IActionResult> Put(int id, CuentaUpdateDto dto)
         {
-            if (id != cuenta.Id)
-                return BadRequest();
+            var cuenta = await _context.Cuentas.FindAsync(id);
 
-            _context.Entry(cuenta).State = EntityState.Modified;
+            if (cuenta == null)
+                return NotFound();
+
+            cuenta.NumeroCuenta = dto.NumeroCuenta;
+            cuenta.TipoCuenta = dto.TipoCuenta;
+            cuenta.Estado = dto.Estado;
+            cuenta.ClienteId = dto.ClienteId;
+
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -64,7 +79,8 @@ namespace CuentaMovimiento.Api.Controllers
             if (cuenta == null)
                 return NotFound();
 
-            _context.Cuentas.Remove(cuenta);
+            cuenta.Estado = false;
+
             await _context.SaveChangesAsync();
 
             return NoContent();
