@@ -10,9 +10,23 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{41521C5A-3312-4389-8E25-6BC14166CBC3}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianetBank.Tests", "MedianetBank.Tests\MedianetBank.Tests.csproj", "{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ai", "ai", "{FD68284D-9079-4F6D-91C5-B2C3103DC5DC}"
+	ProjectSection(SolutionItems) = preProject
+		decisions.md = decisions.md
+		prompts.md = prompts.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generations", "generations", "{E50DB03E-3E35-4E97-88FD-B62AC6DBDC49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "agent", "agent", "{A46EFE7E-DBF4-4FC1-BFB3-8FD23F7A86B0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitkeep = .gitkeep
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,5 +49,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E50DB03E-3E35-4E97-88FD-B62AC6DBDC49} = {FD68284D-9079-4F6D-91C5-B2C3103DC5DC}
+		{A46EFE7E-DBF4-4FC1-BFB3-8FD23F7A86B0} = {FD68284D-9079-4F6D-91C5-B2C3103DC5DC}
 	EndGlobalSection
 EndGlobal
