@@ -1,0 +1,150 @@
+USE [master]
+GO
+/****** Object:  Database [ClientePersonaDb]    Script Date: 24/6/2026 15:12:02 ******/
+CREATE DATABASE [ClientePersonaDb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ClientePersonaDb', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\ClientePersonaDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'ClientePersonaDb_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\ClientePersonaDb_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [ClientePersonaDb] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ClientePersonaDb].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ClientePersonaDb] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [ClientePersonaDb] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ClientePersonaDb] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ClientePersonaDb] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [ClientePersonaDb] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ClientePersonaDb] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [ClientePersonaDb] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [ClientePersonaDb] SET  MULTI_USER 
+GO
+ALTER DATABASE [ClientePersonaDb] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ClientePersonaDb] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ClientePersonaDb] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ClientePersonaDb] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ClientePersonaDb] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [ClientePersonaDb] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [ClientePersonaDb] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [ClientePersonaDb] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [ClientePersonaDb]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 24/6/2026 15:12:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Clientes]    Script Date: 24/6/2026 15:12:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Clientes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ClienteId] [nvarchar](450) NOT NULL,
+	[Contrasena] [nvarchar](max) NOT NULL,
+	[Estado] [bit] NOT NULL,
+	[Nombre] [nvarchar](max) NOT NULL,
+	[Genero] [nvarchar](max) NOT NULL,
+	[Edad] [int] NOT NULL,
+	[Identificacion] [nvarchar](450) NOT NULL,
+	[Direccion] [nvarchar](max) NOT NULL,
+	[Telefono] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_Clientes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20260623204647_InitialCreateClientePersona', N'6.0.36')
+GO
+SET IDENTITY_INSERT [dbo].[Clientes] ON 
+
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (1, N'CLI0001', N'12345', 1, N'Maria Vera Cedeño', N'Femenino', 32, N'1234567892', N'Cuenca', N'0999999999')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (2, N'CLI0002', N'1234', 1, N'Ramon Jesus Morales', N'Masculino', 30, N'1234567893', N'Quito', N'0999999999')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (5, N'CLI0003', N'1234567890', 1, N'Julio Peralta Barzola', N'Femenino', 48, N'1234567890', N'Quevedo', N'0999999999')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (7, N'CLI0006', N'1234567891', 1, N'Miguel Angeles Suarez', N'Masculino', 56, N'1234567891', N'Babahoyo', N'0999999999')
+SET IDENTITY_INSERT [dbo].[Clientes] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Clientes_ClienteId]    Script Date: 24/6/2026 15:12:02 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Clientes_ClienteId] ON [dbo].[Clientes]
+(
+	[ClienteId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Clientes_Identificacion]    Script Date: 24/6/2026 15:12:02 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Clientes_Identificacion] ON [dbo].[Clientes]
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+USE [master]
+GO
+ALTER DATABASE [ClientePersonaDb] SET  READ_WRITE 
+GO
