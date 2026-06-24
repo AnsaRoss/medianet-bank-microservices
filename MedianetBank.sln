@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientePersona.Api", "ClientePersona.Api\ClientePersona.Api.csproj", "{A9D2CD29-1556-4475-BEA8-A2E4D23BDB7B}"
 EndProject
@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianetBank.Tests", "MedianetBank.Tests\MedianetBank.Tests.csproj", "{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{5BAE0048-0D55-495F-AFA6-EEABD655786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BAE0048-0D55-495F-AFA6-EEABD655786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BAE0048-0D55-495F-AFA6-EEABD655786D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
