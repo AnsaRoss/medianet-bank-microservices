@@ -15,17 +15,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianetBank.Tests", "MedianetBank.Tests\MedianetBank.Tests.csproj", "{D83D0A3C-CEBE-4FFA-BB18-91CD6ACD3A3C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ai", "ai", "{FD68284D-9079-4F6D-91C5-B2C3103DC5DC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ai", "ai", "{FCF52204-B83F-4119-A765-B83987A8A140}"
 	ProjectSection(SolutionItems) = preProject
-		decisions.md = decisions.md
-		prompts.md = prompts.md
+		ai\decisions.md = ai\decisions.md
+		ai\prompts.md = ai\prompts.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generations", "generations", "{E50DB03E-3E35-4E97-88FD-B62AC6DBDC49}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "agent", "agent", "{A46EFE7E-DBF4-4FC1-BFB3-8FD23F7A86B0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generations", "generations", "{07F43ED5-5B42-462D-B3B9-0528E02DE38E}"
 	ProjectSection(SolutionItems) = preProject
-		.gitkeep = .gitkeep
+		ai\generations\.gitkeep = ai\generations\.gitkeep
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "agent", "agent", "{46D5EEDE-DF97-4574-8CD0-B824D4A06E34}"
+	ProjectSection(SolutionItems) = preProject
+		ai\generations\.gitkeep = ai\generations\.gitkeep
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDScripts", "BDScripts", "{2E190927-CFEE-4929-AE02-35BD7BCB6583}"
+	ProjectSection(SolutionItems) = preProject
+		BDScripts\ClientePersonaDb.sql = BDScripts\ClientePersonaDb.sql
+		BDScripts\CuentaMovimientoDb.sql = BDScripts\CuentaMovimientoDb.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{E715E71C-B5B7-46BB-AB68-29233E5C13ED}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\and26\Downloads\_MediTest.postman_collection.json = C:\Users\and26\Downloads\_MediTest.postman_collection.json
 	EndProjectSection
 EndProject
 Global
@@ -51,7 +65,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E50DB03E-3E35-4E97-88FD-B62AC6DBDC49} = {FD68284D-9079-4F6D-91C5-B2C3103DC5DC}
-		{A46EFE7E-DBF4-4FC1-BFB3-8FD23F7A86B0} = {FD68284D-9079-4F6D-91C5-B2C3103DC5DC}
+		{FCF52204-B83F-4119-A765-B83987A8A140} = {41521C5A-3312-4389-8E25-6BC14166CBC3}
+		{07F43ED5-5B42-462D-B3B9-0528E02DE38E} = {FCF52204-B83F-4119-A765-B83987A8A140}
+		{46D5EEDE-DF97-4574-8CD0-B824D4A06E34} = {FCF52204-B83F-4119-A765-B83987A8A140}
+		{2E190927-CFEE-4929-AE02-35BD7BCB6583} = {41521C5A-3312-4389-8E25-6BC14166CBC3}
+		{E715E71C-B5B7-46BB-AB68-29233E5C13ED} = {41521C5A-3312-4389-8E25-6BC14166CBC3}
 	EndGlobalSection
 EndGlobal

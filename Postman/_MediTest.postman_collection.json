@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "cc0cbde0-48b9-48ec-9d72-e2d571a5fbc1",
+		"name": "_Medi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10124181",
+		"_collection_link": "https://planetary-crescent-662679.postman.co/workspace/LinkDigital~b735a246-e9a0-4d2b-bee7-95d46838b5f2/collection/10124181-cc0cbde0-48b9-48ec-9d72-e2d571a5fbc1?action=share&source=collection_link&creator=10124181"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "https://localhost:7001/api/Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7001/api/Clientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Ernesto Felix Barzola\",\r\n  \"genero\": \"Masculino\",\r\n  \"edad\": 56,\r\n  \"identificacion\": \"1234567891\",\r\n  \"direccion\": \"Mocache\",\r\n  \"telefono\": \"0999999999\",\r\n  \"contrasena\": \"1234567891\",\r\n  \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7001/api/Clientes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Teresa Felix Barzola\",\r\n    \"genero\": \"Femenino\",\r\n    \"edad\": 48,\r\n    \"identificacion\": \"1234567890\",\r\n    \"direccion\": \"Mocache\",\r\n    \"telefono\": \"0985011713\",\r\n    \"contrasena\": \"1234567890\",\r\n    \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes/7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7001/api/Clientes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Teresa Felix Barzola\",\r\n    \"genero\": \"Femenino\",\r\n    \"edad\": 48,\r\n    \"identificacion\": \"1234567890\",\r\n    \"direccion\": \"Mocache\",\r\n    \"telefono\": \"0985011713\",\r\n    \"contrasena\": \"1234567890\",\r\n    \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7001/api/Clientes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes/7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7001/api/Clientes Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7001/api/Clientes/codigo/CLI0001",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"Clientes",
+								"codigo",
+								"CLI0001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "https://localhost:7002/api/Cuentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/Cuentas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/Cuentas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numeroCuenta\": \"00123456783\",\r\n  \"tipoCuenta\": \"AHORROS\",\r\n  \"saldoInicial\": 100,\r\n  \"estado\": true,\r\n  \"clienteId\": \"CLI0006\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7002/api/Cuentas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/Cuentas/4",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/Cuentas/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Cuentas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/Cuentas/4",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numeroCuenta\": \"00123456781\",\r\n  \"tipoCuenta\": \"AHORROS\",\r\n  \"estado\": true,\r\n  \"clienteId\": \"CLI0003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7002/api/Cuentas/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Cuentas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/Cuentas/4 Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/Cuentas/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Cuentas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimientos",
+			"item": [
+				{
+					"name": "https://localhost:7002/api/movimientos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/movimientos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/movimientos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"valor\": -6400,\r\n  \"cuentaId\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7002/api/movimientos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/movimientos/3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/movimientos/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"movimientos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7002/api/Movimientos/3/reverso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7002/api/Movimientos/3/reverso",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Movimientos",
+								"3",
+								"reverso"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reportes",
+			"item": [
+				{
+					"name": "https://localhost:7002/api/Reportes?FechaInicio=2026-06-23&FechaFin=2026-06-23&ClienteId=CLI0001",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7002/api/Reportes?FechaInicio=2026-06-23&FechaFin=2026-06-24&ClienteId=CLI0002",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"api",
+								"Reportes"
+							],
+							"query": [
+								{
+									"key": "FechaInicio",
+									"value": "2026-06-23"
+								},
+								{
+									"key": "FechaFin",
+									"value": "2026-06-24"
+								},
+								{
+									"key": "ClienteId",
+									"value": "CLI0002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
