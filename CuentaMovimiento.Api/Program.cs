@@ -1,4 +1,6 @@
 using CuentaMovimiento.Api.Data;
+using CuentaMovimiento.Api.Middlewares;
+using CuentaMovimiento.Api.Repositories;
 using CuentaMovimiento.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ICuentaRepository, CuentaRepository>();
+builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
+builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
+builder.Services.AddScoped<ICuentaService, CuentaService>();
+builder.Services.AddScoped<IMovimientoService, MovimientoService>();
+builder.Services.AddScoped<IReporteService, ReporteService>();
 
 builder.Services.AddHttpClient<IClienteHttpService, ClienteHttpService>(client =>
 {
@@ -29,8 +38,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+
