@@ -1,6 +1,7 @@
 ﻿using CuentaMovimiento.Api.Data;
 using CuentaMovimiento.Api.DTOs;
 using CuentaMovimiento.Api.Entities;
+using CuentaMovimiento.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,13 @@ namespace CuentaMovimiento.Api.Controllers
     public class CuentasController : ControllerBase
     {
         private readonly CuentaMovimientoDbContext _context;
+        private readonly IClienteHttpService _clienteHttpService;
 
-        public CuentasController(CuentaMovimientoDbContext context)
+        public CuentasController(CuentaMovimientoDbContext context,
+        IClienteHttpService clienteHttpService)
         {
             _context = context;
+            _clienteHttpService = clienteHttpService;
         }
 
         [HttpGet]
@@ -37,6 +41,11 @@ namespace CuentaMovimiento.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Cuenta>> Post(CuentaCreateDto dto)
         {
+            var existeCliente = await _clienteHttpService.ExisteCliente(dto.ClienteId);
+
+            if (!existeCliente)
+                return BadRequest("El cliente no existe");
+
             var cuenta = new Cuenta
             {
                 NumeroCuenta = dto.NumeroCuenta,
@@ -60,6 +69,11 @@ namespace CuentaMovimiento.Api.Controllers
 
             if (cuenta == null)
                 return NotFound();
+
+            var existeCliente = await _clienteHttpService.ExisteCliente(dto.ClienteId);
+
+            if (!existeCliente)
+                return BadRequest("El cliente no existe");
 
             cuenta.NumeroCuenta = dto.NumeroCuenta;
             cuenta.TipoCuenta = dto.TipoCuenta;

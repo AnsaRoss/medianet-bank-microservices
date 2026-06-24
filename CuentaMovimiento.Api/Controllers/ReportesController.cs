@@ -1,4 +1,5 @@
 ﻿using CuentaMovimiento.Api.Data;
+using CuentaMovimiento.Api.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,19 +17,16 @@ namespace CuentaMovimiento.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(
-            DateTime fechaInicio,
-            DateTime fechaFin,
-            int clienteId)
+        public async Task<ActionResult<IEnumerable<ReporteResponseDto>>> Get([FromQuery] ReporteRequestDto request)
         {
             var resultado = await (
                 from c in _context.Cuentas
                 join m in _context.Movimientos
                     on c.Id equals m.CuentaId
-                where c.ClienteId == clienteId
-                    && m.Fecha.Date >= fechaInicio.Date
-                    && m.Fecha.Date <= fechaFin.Date
-                select new
+                where c.ClienteId == request.ClienteId
+                    && m.Fecha.Date >= request.FechaInicio.Date
+                    && m.Fecha.Date <= request.FechaFin.Date
+                select new ReporteResponseDto
                 {
                     Fecha = m.Fecha,
                     ClienteId = c.ClienteId,

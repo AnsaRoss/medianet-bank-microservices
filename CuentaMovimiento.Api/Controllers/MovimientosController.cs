@@ -1,4 +1,6 @@
-﻿using CuentaMovimiento.Api.Data;
+﻿using System.Drawing;
+using CuentaMovimiento.Api.Data;
+using CuentaMovimiento.Api.DTOs;
 using CuentaMovimiento.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +36,7 @@ namespace CuentaMovimiento.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Movimiento>> Post(Movimiento movimiento)
+        public async Task<ActionResult<Movimiento>> Post(MovimientoCreateDto dto)
         {
             var cuenta = await _context.Cuentas.FindAsync(dto.CuentaId);
 
@@ -61,6 +63,44 @@ namespace CuentaMovimiento.Api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(Get), new { id = movimiento.Id }, movimiento);
+        }
+        //Aunque el enunciado solicita CRUD sobre movimientos, por criterio financiero evité
+        //modificar transacciones históricas directamente.Para correcciones se implementa un
+        //reverso mediante un nuevo movimiento que compensa el valor original y mantiene trazabilidad.
+        [HttpPost("{id}/reverso")]
+        public async Task<ActionResult<Movimiento>> Reversar(int id)
+        {
+            var movimientoOriginal = await _context.Movimientos.FindAsync(id);
+
+            if (movimientoOriginal == null)
+                return NotFound();
+
+            var cuenta = await _context.Cuentas.FindAsync(movimientoOriginal.CuentaId);
+
+            if (cuenta == null)
+                return BadRequest("La cuenta no existe.");
+
+            var valorReverso = movimientoOriginal.Valor * -1;
+            var nuevoSaldo = cuenta.SaldoActual + valorReverso;
+
+            if (nuevoSaldo < 0)
+                return BadRequest("Saldo no disponible");
+
+            var movimientoReverso = new Movimiento
+            {
+                Fecha = DateTime.Now,
+                TipoMovimiento = "Reverso",
+                Valor = valorReverso,
+                Saldo = nuevoSaldo,
+                CuentaId = movimientoOriginal.CuentaId
+            };
+
+            cuenta.SaldoActual = nuevoSaldo;
+
+            _context.Movimientos.Add(movimientoReverso);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), new { id = movimientoReverso.Id }, movimientoReverso);
         }
     }
 }

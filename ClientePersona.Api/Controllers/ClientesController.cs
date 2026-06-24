@@ -1,8 +1,6 @@
-using ClientePersona.Api.Data;
-using ClientePersona.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ClientePersona.Api.DTOs;
+using ClientePersona.Api.Services;
 
 namespace ClientePersona.Api.Controllers
 {
@@ -10,94 +8,52 @@ namespace ClientePersona.Api.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-        private readonly ClientePersonaDbContext _context;
+        private readonly IClienteService _clienteService;
 
-        public ClientesController(ClientePersonaDbContext context)
+        public ClientesController(IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> Get()
+        public async Task<ActionResult<IEnumerable<ClienteResponseDto>>> Get()
         {
-            return await _context.Clientes.ToListAsync();
+            var clientes = await _clienteService.ObtenerTodos();
+            return Ok(clientes);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> Get(int id)
+        public async Task<ActionResult<ClienteResponseDto>> Get(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-
-            if (cliente == null)
-                return NotFound();
-
-            return cliente;
+            var cliente = await _clienteService.ObtenerPorId(id);
+            return Ok(cliente);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cliente>> Post(ClienteCreateDto dto)
+        public async Task<ActionResult<ClienteResponseDto>> Post(ClienteCreateDto dto)
         {
-            var ultimoCliente = await _context.Clientes
-                .OrderByDescending(c => c.Id)
-                .FirstOrDefaultAsync();
-
-            var siguienteNumero = ultimoCliente == null
-                ? 1
-                : ultimoCliente.Id + 1;
-
-            var cliente = new Cliente
-            {
-                ClienteId = $"CLI{siguienteNumero:D4}",
-                Nombre = dto.Nombre,
-                Genero = dto.Genero,
-                Edad = dto.Edad,
-                Identificacion = dto.Identificacion,
-                Direccion = dto.Direccion,
-                Telefono = dto.Telefono,
-                Contrasena = dto.Contrasena,
-                Estado = dto.Estado
-            };
-
-            _context.Clientes.Add(cliente);
-            await _context.SaveChangesAsync();
-
+            var cliente = await _clienteService.Crear(dto);
             return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ClienteUpdateDto dto)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-
-            if (cliente == null)
-                return NotFound();
-
-            cliente.Nombre = dto.Nombre;
-            cliente.Genero = dto.Genero;
-            cliente.Edad = dto.Edad;
-            cliente.Identificacion = dto.Identificacion;
-            cliente.Direccion = dto.Direccion;
-            cliente.Telefono = dto.Telefono;
-            cliente.Contrasena = dto.Contrasena;
-            cliente.Estado = dto.Estado;
-
-            await _context.SaveChangesAsync();
-
+            await _clienteService.Actualizar(id, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-
-            if (cliente == null)
-                return NotFound();
-
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
-
+            await _clienteService.Eliminar(id);
             return NoContent();
+        }
+        [HttpGet("codigo/{clienteId}")]
+        public async Task<ActionResult<ClienteResponseDto>> GetByClienteId(string clienteId)
+        {
+            var cliente = await _clienteService.ObtenerPorClienteId(clienteId);
+            return Ok(cliente);
         }
     }
 }
