@@ -60,8 +60,9 @@ Ejemplo:
 
 ```http
 GET https://localhost:7001/api/Clientes/codigo/CLI0001
+```
 
-Reglas de negocio
+## Reglas de negocio
 - Un cliente puede tener varias cuentas.
 - El número de cuenta debe ser único.
 - El saldo inicial no puede ser negativo.
@@ -71,25 +72,25 @@ Reglas de negocio
 - Los movimientos históricos no se editan directamente; se usa reverso para mantener trazabilidad.
 
 Endpoints principales
-Clientes
+### Clientes
 	GET /api/Clientes
 	GET /api/Clientes/{id}
 	GET /api/Clientes/codigo/{clienteId}
 	POST /api/Clientes
 	PUT /api/Clientes/{id}
 	DELETE /api/Clientes/{id}
-Cuentas
+### Cuentas
 	GET /api/Cuentas
 	GET /api/Cuentas/{id}
 	POST /api/Cuentas
 	PUT /api/Cuentas/{id}
 	DELETE /api/Cuentas/{id}
-Movimientos
+### Movimientos
 	GET /api/Movimientos
 	GET /api/Movimientos/{id}
 	POST /api/Movimientos
 	POST /api/Movimientos/{id}/reverso
-Reportes
+### Reportes
 	GET /api/Reportes?FechaInicio=2022-02-01&FechaFin=2022-02-28&ClienteId=CLI0002
 
 Ejecución local
@@ -109,6 +110,19 @@ Swagger
 Con ambos microservicios en ejecución:
 - ClientePersona.Api: https://localhost:7001/swagger
 - CuentaMovimiento.Api: https://localhost:7002/swagger
+
+## Configuración
+
+Actualizar los Connection Strings de cada microservicio según el entorno local antes de ejecutar las migraciones.
+
+Ejemplo:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=SERVIDOR;Database=BaseDatos;Trusted_Connection=True;"
+  }
+}
 
 Pruebas
 Se implementaron pruebas automatizadas con xUnit y Moq.
@@ -155,8 +169,10 @@ Decisiones de diseño
 - No se editan movimientos históricos; se implementó reverso para trazabilidad.
 - Se aplicó manejo centralizado de excepciones para respuestas consistentes.
 
-Pendientes / mejoras futuras
-- Frontend Angular.
-- Docker y docker-compose.
-- JMeter para prueba de carga.
-- Mejorar cobertura de pruebas.
+
+## Mejoras futuras
+
+- Incrementar cobertura de pruebas automatizadas.
+- Incorporar mecanismos de resiliencia entre microservicios.
+- Implementar monitoreo y observabilidad.
+- Optimizar despliegue mediante contenedores.
