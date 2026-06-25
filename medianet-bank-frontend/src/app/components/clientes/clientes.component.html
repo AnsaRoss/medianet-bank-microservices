@@ -1,0 +1,135 @@
+<h2>Clientes</h2>
+
+<div *ngIf="mensaje" class="alert alert-info">
+  {{ mensaje }}
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    {{ editando ? 'Editar Cliente' : 'Nuevo Cliente' }}
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="clienteForm" (ngSubmit)="guardar()">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label>Nombre</label>
+          <input class="form-control" formControlName="nombre">
+          <div class="text-danger" *ngIf="clienteForm.get('nombre')?.invalid &&
+         (clienteForm.get('nombre')?.dirty || clienteForm.get('nombre')?.touched)">
+            Nombre obligatorio, mínimo 3 letras y solo texto.
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>Género</label>
+          <select class="form-control" formControlName="genero">
+            <option value="">Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <div class="text-danger" *ngIf="clienteForm.get('genero')?.invalid &&
+         (clienteForm.get('genero')?.dirty || clienteForm.get('genero')?.touched)">
+              Seleccione un género.
+            </div>
+          </select>
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label>Edad</label>
+          <input type="number" class="form-control" formControlName="edad">
+          <div class="text-danger" *ngIf="clienteForm.get('edad')?.invalid &&
+         (clienteForm.get('edad')?.dirty || clienteForm.get('edad')?.touched)">
+            La edad debe ser entre 18 y 120.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Identificación</label>
+          <input class="form-control" formControlName="identificacion">
+          <div class="text-danger" *ngIf="clienteForm.get('identificacion')?.invalid &&
+         (clienteForm.get('identificacion')?.dirty || clienteForm.get('identificacion')?.touched)">
+            La identificación debe tener 10 números.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Dirección</label>
+          <input class="form-control" formControlName="direccion">
+          <div class="text-danger" *ngIf="clienteForm.get('direccion')?.invalid &&
+         (clienteForm.get('direccion')?.dirty || clienteForm.get('direccion')?.touched)">
+            La dirección es obligatoria y debe tener al menos 5 caracteres.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Teléfono</label>
+          <input class="form-control" formControlName="telefono">
+          <div class="text-danger" *ngIf="clienteForm.get('telefono')?.invalid &&
+         (clienteForm.get('telefono')?.dirty || clienteForm.get('telefono')?.touched)">
+            El teléfono debe comenzar con 09 y tener 10 dígitos.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Contraseña</label>
+          <input type="password" class="form-control" formControlName="contrasena">
+          <div class="text-danger" *ngIf="clienteForm.get('contrasena')?.invalid &&
+         (clienteForm.get('contrasena')?.dirty || clienteForm.get('contrasena')?.touched)">
+            La contraseña es obligatoria y debe tener al menos 4 caracteres.
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3 d-flex align-items-end">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" formControlName="estado">
+            <label class="form-check-label">Activo</label>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary me-2" type="submit" [disabled]="clienteForm.invalid">
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+
+      <button class="btn btn-secondary" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ClienteId</th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>Identificación</th>
+      <th>Teléfono</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let cliente of clientes">
+      <td>{{ cliente.clienteId }}</td>
+      <td>{{ cliente.nombre }}</td>
+      <td>{{ cliente.genero }}</td>
+      <td>{{ cliente.edad }}</td>
+      <td>{{ cliente.identificacion }}</td>
+      <td>{{ cliente.telefono }}</td>
+      <td>{{ cliente.estado ? 'Activo' : 'Inactivo' }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm me-2" (click)="editar(cliente)">
+          Editar
+        </button>
+
+        <button class="btn btn-danger btn-sm" (click)="eliminar(cliente.id)">
+          Inactivar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

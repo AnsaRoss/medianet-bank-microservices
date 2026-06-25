@@ -1,0 +1,54 @@
+<h2>Movimientos</h2>
+
+<div *ngIf="mensaje" class="alert alert-success">
+  {{ mensaje }}
+</div>
+
+<div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    Registrar Movimiento
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="movimientoForm" (ngSubmit)="guardar()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Cuenta</label>
+          <select class="form-control" formControlName="cuentaId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
+              {{ cuenta.numeroCuenta }} - {{ cuenta.tipoCuenta }} - Saldo: {{ cuenta.saldoActual }}
+            </option>
+            <div class="text-danger" *ngIf="movimientoForm.get('cuentaId')?.invalid && (movimientoForm.get('cuentaId')?.dirty || movimientoForm.get('cuentaId')?.touched)">
+              Seleccione una cuenta.
+            </div>
+          </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Valor</label>
+          <input type="number" class="form-control" formControlName="valor">
+          <small class="text-muted">
+            Positivo = depósito, negativo = retiro
+          </small>
+          <div class="text-danger" *ngIf="movimientoForm.get('valor')?.invalid && (movimientoForm.get('valor')?.dirty || movimientoForm.get('valor')?.touched)">
+            Ingrese un valor válido. Puede ser positivo o negativo.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Tipo</label>
+          <input class="form-control" [value]="obtenerTipoMovimiento()" disabled>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="movimientoForm.invalid">
+        Registrar Movimiento
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<h2>Cuentas</h2>
+
+<div *ngIf="mensaje" class="alert alert-info">
+  {{ mensaje }}
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    {{ editando ? 'Editar Cuenta' : 'Nueva Cuenta' }}
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="cuentaForm" (ngSubmit)="guardar()">
+      <div class="row">
+
+        <div class="col-md-3 mb-3">
+          <label>Número Cuenta</label>
+          <input class="form-control" formControlName="numeroCuenta">
+          <div class="text-danger" *ngIf="cuentaForm.get('numeroCuenta')?.invalid && (cuentaForm.get('numeroCuenta')?.dirty || cuentaForm.get('numeroCuenta')?.touched)">
+            Número de cuenta obligatorio, solo números, mínimo 10 dígitos.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Tipo Cuenta</label>
+          <select class="form-control" formControlName="tipoCuenta">
+            <option value="">Seleccione</option>
+            <option value="Ahorro">Ahorro</option>
+            <option value="Corriente">Corriente</option>
+            <div class="text-danger" *ngIf="cuentaForm.get('tipoCuenta')?.invalid && (cuentaForm.get('tipoCuenta')?.dirty || cuentaForm.get('tipoCuenta')?.touched)">
+              Seleccione el tipo de cuenta.
+            </div>
+          </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Saldo Inicial</label>
+          <input type="number" class="form-control" formControlName="saldoInicial">
+          <div class="text-danger" *ngIf="cuentaForm.get('saldoInicial')?.invalid && (cuentaForm.get('saldoInicial')?.dirty || cuentaForm.get('saldoInicial')?.touched)">
+            El saldo inicial debe ser mayor o igual a 0.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Cliente</label>
+          <select class="form-control" formControlName="clienteId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let cliente of clientes" [value]="cliente.clienteId">
+              {{ cliente.clienteId }} - {{ cliente.nombre }}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="cuentaForm.get('clienteId')?.invalid && (cuentaForm.get('clienteId')?.dirty || cuentaForm.get('clienteId')?.touched)">
+            Seleccione un cliente.
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3 d-flex align-items-end">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" formControlName="estado">
+            <label class="form-check-label">Activo</label>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary me-2" type="submit" [disabled]="cuentaForm.invalid">
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+
+      <button class="btn btn-secondary" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Número Cuenta</th>
+      <th>Tipo</th>
+      <th>Saldo Inicial</th>
+      <th>ClienteId</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let cuenta of cuentas">
+      <td>{{ cuenta.numeroCuenta }}</td>
+      <td>{{ cuenta.tipoCuenta }}</td>
+      <td>{{ cuenta.saldoInicial }}</td>
+      <td>{{ cuenta.clienteId }}</td>
+      <td>{{ cuenta.estado ? 'Activo' : 'Inactivo' }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm me-2" (click)="editar(cuenta)">
+          Editar
+        </button>
+
+        <button class="btn btn-danger btn-sm" (click)="eliminar(cuenta.id)">
+          Inactivar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

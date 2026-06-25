@@ -1,0 +1,82 @@
+<h2>Reportes</h2>
+
+<div *ngIf="mensaje" class="alert alert-info">
+  {{ mensaje }}
+</div>
+
+<div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    Estado de Cuenta
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="reporteForm" (ngSubmit)="consultar()">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <label>Fecha Inicio</label>
+          <input type="date" class="form-control" formControlName="fechaInicio">
+          <div class="text-danger" *ngIf="reporteForm.get('fechaInicio')?.invalid && (reporteForm.get('fechaInicio')?.dirty || reporteForm.get('fechaInicio')?.touched)">
+            Seleccione la fecha inicio.
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Fecha Fin</label>
+          <input type="date" class="form-control" formControlName="fechaFin">
+          <div class="text-danger" *ngIf="reporteForm.get('fechaFin')?.invalid && (reporteForm.get('fechaFin')?.dirty || reporteForm.get('fechaFin')?.touched)">
+            Seleccione la fecha fin.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label>Cliente</label>
+          <select class="form-control" formControlName="clienteId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let cliente of clientes" [value]="cliente.clienteId">
+              {{ cliente.clienteId }} - {{ cliente.nombre }}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="reporteForm.get('clienteId')?.invalid && (reporteForm.get('clienteId')?.dirty || reporteForm.get('clienteId')?.touched)">
+            Seleccione un cliente.
+          </div>
+        </div>
+
+        <div class="col-md-2 mb-3 d-flex align-items-end">
+          <button class="btn btn-primary w-100" type="submit" [disabled]="reporteForm.invalid">
+            Consultar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped" *ngIf="reportes.length > 0">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Número Cuenta</th>
+      <th>Tipo</th>
+      <th>Saldo Inicial</th>
+      <th>Movimiento</th>
+      <th>Saldo Disponible</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of reportes">
+      <td>{{ item.fecha | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>{{ item.cliente }}</td>
+      <td>{{ item.numeroCuenta }}</td>
+      <td>{{ item.tipoCuenta }}</td>
+      <td>{{ item.saldoInicial }}</td>
+      <td>{{ item.movimiento }}</td>
+      <td>{{ item.saldoDisponible }}</td>
+    </tr>
+  </tbody>
+</table>
