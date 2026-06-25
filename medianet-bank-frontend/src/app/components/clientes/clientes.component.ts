@@ -33,7 +33,7 @@ export class ClientesComponent implements OnInit {
       edad: [18, [Validators.required, Validators.min(18), Validators.max(120)]],
       identificacion: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       direccion: ['', [Validators.required, Validators.minLength(5)]],
-      telefono: ['', [Validators.required, Validators.pattern('^09[0-9]{8}$')]],
+      telefono: ['', [Validators.required, Validators.pattern('^09[0-9]{7}$')]],
       contrasena: ['', [Validators.required, Validators.minLength(4)]],
       estado: [true]
     });

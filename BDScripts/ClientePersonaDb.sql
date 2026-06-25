@@ -122,10 +122,9 @@ INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N
 GO
 SET IDENTITY_INSERT [dbo].[Clientes] ON 
 
-INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (1, N'CLI0001', N'12345', 1, N'Maria Vera Cede o', N'Femenino', 32, N'1234567892', N'Cuenca', N'0999999999')
-INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (2, N'CLI0002', N'1234', 1, N'Ramon Jesus Morales', N'Masculino', 30, N'1234567893', N'Quito', N'0999999999')
-INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (5, N'CLI0003', N'1234567890', 1, N'Julio Peralta Barzola', N'Femenino', 48, N'1234567890', N'Quevedo', N'0999999999')
-INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (7, N'CLI0006', N'1234567891', 1, N'Miguel Angeles Suarez', N'Masculino', 56, N'1234567891', N'Babahoyo', N'0999999999')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (1, N'CLI0001', N'1234', 1, N'Jose Lema', N'Masculino', 30, N'1710034065', N'Otavalo sn y principal', N'098254785')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (2, N'CLI0002', N'5678', 1, N'Marianela Montalvo', N'Femenino', 35, N'1710034066', N'Amazonas y NNUU', N'097548965')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (3, N'CLI0003', N'1245', 1, N'Juan Osorio', N'Masculino', 28, N'1710034067', N'13 junio y Equinoccial', N'098874587')
 SET IDENTITY_INSERT [dbo].[Clientes] OFF
 GO
 SET ANSI_PADDING ON

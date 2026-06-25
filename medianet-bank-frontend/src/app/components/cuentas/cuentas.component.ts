@@ -33,7 +33,7 @@ export class CuentasComponent implements OnInit {
 
   crearFormulario(): void {
     this.cuentaForm = this.fb.group({
-      numeroCuenta: ['', [Validators.required, Validators.pattern('^[0-9]{10,20}$')]],
+      numeroCuenta: ['', [Validators.required, Validators.pattern('^[0-9]{5,15}$')]],
       tipoCuenta: ['', Validators.required],
       saldoInicial: [0, [Validators.required, Validators.min(0)]],
       estado: [true],

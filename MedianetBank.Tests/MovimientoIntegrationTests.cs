@@ -52,4 +52,5 @@ public class MovimientoIntegrationTests
         movimientoRepositoryMock.Verify(r => r.Crear(It.IsAny<Movimiento>()), Times.Never);
         movimientoRepositoryMock.Verify(r => r.GuardarCambios(), Times.Never);
     }
+
 }

@@ -28,7 +28,7 @@ namespace ClientePersona.Api.DTOs
         public string Direccion { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El telefono es obligatorio")]
-        [RegularExpression(@"^\d{10,10}$", ErrorMessage = "El telefono debe contener 10 digitos")]
+        [RegularExpression(@"^\d{8,10}$", ErrorMessage = "El teléfono debe contener máximo 10 digitos")]
         public string Telefono { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "La contrasena es obligatoria")]

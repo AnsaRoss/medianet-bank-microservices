@@ -138,20 +138,19 @@ INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N
 GO
 SET IDENTITY_INSERT [dbo].[Cuentas] ON 
 
-INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (1, N'00123456789', N'AHORROS', CAST(1000.00 AS Decimal(18, 2)), CAST(1600.00 AS Decimal(18, 2)), 1, N'CLI0001')
-INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (2, N'00123456780', N'AHORROS', CAST(2000.00 AS Decimal(18, 2)), CAST(1400.00 AS Decimal(18, 2)), 1, N'CLI0002')
-INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (4, N'00123456781', N'AHORROS', CAST(100.00 AS Decimal(18, 2)), CAST(100.00 AS Decimal(18, 2)), 0, N'CLI0003')
-INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (7, N'00123456783', N'AHORROS', CAST(100.00 AS Decimal(18, 2)), CAST(500.00 AS Decimal(18, 2)), 1, N'CLI0006')
-INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (10, N'00123456784', N'AHORROS', CAST(100.00 AS Decimal(18, 2)), CAST(100.00 AS Decimal(18, 2)), 1, N'CLI0006')
+INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (1, N'478758', N'Ahorro', CAST(2000.00 AS Decimal(18, 2)), CAST(1425.00 AS Decimal(18, 2)), 1, N'CLI0001')
+INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (2, N'225487', N'Corriente', CAST(100.00 AS Decimal(18, 2)), CAST(700.00 AS Decimal(18, 2)), 1, N'CLI0002')
+INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (3, N'495878', N'Ahorros', CAST(0.00 AS Decimal(18, 2)), CAST(150.00 AS Decimal(18, 2)), 1, N'CLI0003')
+INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (4, N'496825', N'Ahorros', CAST(540.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(18, 2)), 1, N'CLI0002')
+INSERT [dbo].[Cuentas] ([Id], [NumeroCuenta], [TipoCuenta], [SaldoInicial], [SaldoActual], [Estado], [ClienteId]) VALUES (5, N'585545', N'Corriente', CAST(1000.00 AS Decimal(18, 2)), CAST(1000.00 AS Decimal(18, 2)), 1, N'CLI0001')
 SET IDENTITY_INSERT [dbo].[Cuentas] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Movimientos] ON 
 
-INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (1, CAST(N'2026-06-23T21:19:25.1270000' AS DateTime2), N'Deposito', CAST(600.00 AS Decimal(18, 2)), CAST(1600.00 AS Decimal(18, 2)), 1)
-INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (2, CAST(N'2026-06-23T21:19:25.1270000' AS DateTime2), N'Retiro', CAST(-600.00 AS Decimal(18, 2)), CAST(1400.00 AS Decimal(18, 2)), 2)
-INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (3, CAST(N'2026-06-24T13:53:39.6008538' AS DateTime2), N'Deposito', CAST(40.00 AS Decimal(18, 2)), CAST(1440.00 AS Decimal(18, 2)), 2)
-INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (4, CAST(N'2026-06-24T13:55:44.1351787' AS DateTime2), N'Reverso', CAST(-40.00 AS Decimal(18, 2)), CAST(1400.00 AS Decimal(18, 2)), 2)
-INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (5, CAST(N'2026-06-24T14:35:18.9647737' AS DateTime2), N'Deposito', CAST(400.00 AS Decimal(18, 2)), CAST(500.00 AS Decimal(18, 2)), 7)
+INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (1, CAST(N'2026-06-25T00:00:00.0000000' AS DateTime2), N'Retiro', CAST(-575.00 AS Decimal(18, 2)), CAST(1425.00 AS Decimal(18, 2)), 1)
+INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (2, CAST(N'2026-06-25T00:00:00.0000000' AS DateTime2), N'Deposito', CAST(600.00 AS Decimal(18, 2)), CAST(700.00 AS Decimal(18, 2)), 2)
+INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (3, CAST(N'2026-06-25T00:00:00.0000000' AS DateTime2), N'Deposito', CAST(150.00 AS Decimal(18, 2)), CAST(150.00 AS Decimal(18, 2)), 3)
+INSERT [dbo].[Movimientos] ([Id], [Fecha], [TipoMovimiento], [Valor], [Saldo], [CuentaId]) VALUES (4, CAST(N'2026-06-25T00:00:00.0000000' AS DateTime2), N'Retiro', CAST(-540.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(18, 2)), 4)
 SET IDENTITY_INSERT [dbo].[Movimientos] OFF
 GO
 SET ANSI_PADDING ON

@@ -99,6 +99,9 @@ namespace CuentaMovimiento.Api.Services
             if (cuenta == null)
                 throw new BusinessException("La cuenta no existe");
 
+            if (!cuenta.Estado)
+                throw new BusinessException("La cuenta se encuentra inactiva");
+
             return cuenta;
         }
 

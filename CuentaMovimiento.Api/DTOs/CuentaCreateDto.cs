@@ -5,7 +5,7 @@ namespace CuentaMovimiento.Api.DTOs
     public class CuentaCreateDto
     {
         [Required(ErrorMessage = "El numero de cuenta es obligatorio")]
-        [RegularExpression(@"^\d{1,10}$", ErrorMessage = "El numero de cuenta debe contener solo numeros y maximo 10 digitos")]
+        [RegularExpression(@"^\d{5,15}$", ErrorMessage = "El numero de cuenta debe contener solo numeros y entre 5 y 15 digitos")]
         public string NumeroCuenta { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El tipo de cuenta es obligatorio")]
