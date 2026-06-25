@@ -10,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CuentaMovimientoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,7 +34,7 @@ builder.Services.AddScoped<IReporteService, ReporteService>();
 
 builder.Services.AddHttpClient<IClienteHttpService, ClienteHttpService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7001/");
+    client.BaseAddress = new Uri(builder.Configuration["Services:ClientePersonaUrl"]!);
 });
 
 var app = builder.Build();
@@ -39,6 +49,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors("AllowAngular");
 
 app.UseAuthorization();
 

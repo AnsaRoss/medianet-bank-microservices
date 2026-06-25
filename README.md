@@ -14,6 +14,8 @@ Cada microservicio maneja su propia base de datos:
 - ClientePersonaDb
 - CuentaMovimientoDb
 
+Además, se incluye un frontend en Angular para consumir las APIs.
+
 ## Tecnologías
 
 - .NET 6
@@ -23,6 +25,9 @@ Cada microservicio maneja su propia base de datos:
 - Swagger / OpenAPI
 - xUnit
 - Moq
+- Docker
+- Docker Compose
+- Postman
 
 ## Microservicios
 
@@ -58,9 +63,7 @@ Esta comunicación se usa para:
 
 Ejemplo:
 
-```http
 GET https://localhost:7001/api/Clientes/codigo/CLI0001
-```
 
 ## Reglas de negocio
 - Un cliente puede tener varias cuentas.
@@ -97,10 +100,11 @@ Ejecución local
 1. Restaurar paquetes: 
 	dotnet restore
 
-2. Aplicar migraciones de cada microservicio:
+2. Configurar las cadenas de conexión en cada appsettings.json.
+3. Aplicar migraciones de cada microservicio:
 	Update-Database
 
-3. Ejecutar ambos microservicios desde Visual Studio usando Multiple Startup Projects.
+4. Ejecutar ambos microservicios desde Visual Studio usando Multiple Startup Projects.
 
 Puertos configurados:
 - ClientePersona.Api: https://localhost:7001
@@ -111,18 +115,43 @@ Con ambos microservicios en ejecución:
 - ClientePersona.Api: https://localhost:7001/swagger
 - CuentaMovimiento.Api: https://localhost:7002/swagger
 
+Frontend Angular
+El frontend se encuentra en la carpeta:
+medianet-bank-frontend
+
+Para ejecutarlo:
+- cd medianet-bank-frontend
+- npm install
+- ng serve -o
+
+El frontend consume las APIs configuradas en los archivos de ambiente de Angular.
+
+Docker
+La solución incluye configuración para ejecución mediante Docker:
+- Dockerfile para ClientePersona.Api.
+- Dockerfile para CuentaMovimiento.Api.
+- docker-compose.yml.
+- .dockerignore.
+
+Para validar la configuración:
+docker compose config
+
+Para construir las imágenes:
+docker compose build
+
+Para levantar los contenedores:
+docker compose up
+
+Servicios configurados:
+- SQL Server: localhost:1433
+- ClientePersona.Api: http://localhost:7001
+- CuentaMovimiento.Api: http://localhost:7002
+
 ## Configuración
 
 Actualizar los Connection Strings de cada microservicio según el entorno local antes de ejecutar las migraciones.
-
 Ejemplo:
-
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=SERVIDOR;Database=BaseDatos;Trusted_Connection=True;"
-  }
-}
+{ "ConnectionStrings": { "DefaultConnection": "Server=SERVIDOR;Database=BaseDatos;Trusted_Connection=True;TrustServerCertificate=True;" } }
 
 Pruebas
 Se implementaron pruebas automatizadas con xUnit y Moq.
@@ -139,12 +168,15 @@ dotnet test
 
 Base de datos
 El script de base de datos se encuentra en:
-- BaseDatos.sql
+- BDScripts
 
 Incluye:
 - Esquema.
 - Entidades.
 - Datos de ejemplo del caso de uso.
+
+Postman
+La carpeta Postman/ contiene la colección para probar los endpoints principales de las APIs.
 
 Uso de IA
 La carpeta ai/ contiene evidencia del uso de Inteligencia Artificial durante el desarrollo:
@@ -160,7 +192,8 @@ La IA fue utilizada para:
 - Revisar validaciones de negocio.
 - Generar pruebas unitarias.
 - Documentar decisiones técnicas.
-Todas las sugerencias fueron revisadas y ajustadas manualmente antes de integrarse al proyecto.
+
+- Todas las sugerencias fueron revisadas y ajustadas manualmente antes de integrarse al proyecto.
 
 Decisiones de diseño
 - Se separó la solución en dos microservicios para respetar la responsabilidad de cada dominio.
@@ -168,11 +201,12 @@ Decisiones de diseño
 - Se implementó delete lógico para preservar información bancaria.
 - No se editan movimientos históricos; se implementó reverso para trazabilidad.
 - Se aplicó manejo centralizado de excepciones para respuestas consistentes.
-
+- Se agregó frontend Angular para validar el flujo funcional completo desde interfaz gráfica.
+- Se agregó Docker para facilitar el despliegue y ejecución del entorno.
 
 ## Mejoras futuras
-
 - Incrementar cobertura de pruebas automatizadas.
 - Incorporar mecanismos de resiliencia entre microservicios.
 - Implementar monitoreo y observabilidad.
+- Mejorar autenticación y autorización.
 - Optimizar despliegue mediante contenedores.

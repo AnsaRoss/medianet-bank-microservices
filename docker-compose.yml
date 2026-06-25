@@ -1,0 +1,61 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: medianetbank-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Your_password123"
+    ports:
+      - "1433:1433"
+
+  db-init:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: medianetbank-db-init
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./BDScripts:/scripts
+      - ./init-db.sh:/init-db.sh
+    entrypoint: ["/bin/bash", "/init-db.sh"]
+
+  cliente-persona-api:
+    build:
+      context: .
+      dockerfile: ClientePersona.Api/Dockerfile
+    container_name: cliente-persona-api
+    ports:
+      - "7001:80"
+    depends_on:
+      db-init:
+          condition: service_completed_successfully
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=ClientePersonaDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;"
+
+  cuenta-movimiento-api:
+    build:
+      context: .
+      dockerfile: CuentaMovimiento.Api/Dockerfile
+    container_name: cuenta-movimiento-api
+    ports:
+      - "7002:80"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+      cliente-persona-api:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=CuentaMovimientoDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;"
+      Services__ClientePersonaUrl: "http://cliente-persona-api/"
+      
+  medianet-bank-frontend:
+    build:
+      context: ./medianet-bank-frontend
+      dockerfile: Dockerfile
+    container_name: medianet-bank-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - cliente-persona-api
+      - cuenta-movimiento-api

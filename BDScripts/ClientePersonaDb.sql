@@ -1,13 +1,13 @@
 USE [master]
 GO
 /****** Object:  Database [ClientePersonaDb]    Script Date: 24/6/2026 15:12:02 ******/
-CREATE DATABASE [ClientePersonaDb]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'ClientePersonaDb', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\ClientePersonaDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'ClientePersonaDb_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\ClientePersonaDb_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+IF DB_ID('ClientePersonaDb') IS NULL
+BEGIN
+    CREATE DATABASE ClientePersonaDb;
+END
+GO
+
+USE ClientePersonaDb;
 GO
 ALTER DATABASE [ClientePersonaDb] SET COMPATIBILITY_LEVEL = 160
 GO
@@ -26,7 +26,7 @@ ALTER DATABASE [ClientePersonaDb] SET ANSI_WARNINGS OFF
 GO
 ALTER DATABASE [ClientePersonaDb] SET ARITHABORT OFF 
 GO
-ALTER DATABASE [ClientePersonaDb] SET AUTO_CLOSE ON 
+ALTER DATABASE [ClientePersonaDb] SET AUTO_CLOSE OFF 
 GO
 ALTER DATABASE [ClientePersonaDb] SET AUTO_SHRINK OFF 
 GO
@@ -122,7 +122,7 @@ INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N
 GO
 SET IDENTITY_INSERT [dbo].[Clientes] ON 
 
-INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (1, N'CLI0001', N'12345', 1, N'Maria Vera Cedeño', N'Femenino', 32, N'1234567892', N'Cuenca', N'0999999999')
+INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (1, N'CLI0001', N'12345', 1, N'Maria Vera Cede o', N'Femenino', 32, N'1234567892', N'Cuenca', N'0999999999')
 INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (2, N'CLI0002', N'1234', 1, N'Ramon Jesus Morales', N'Masculino', 30, N'1234567893', N'Quito', N'0999999999')
 INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (5, N'CLI0003', N'1234567890', 1, N'Julio Peralta Barzola', N'Femenino', 48, N'1234567890', N'Quevedo', N'0999999999')
 INSERT [dbo].[Clientes] ([Id], [ClienteId], [Contrasena], [Estado], [Nombre], [Genero], [Edad], [Identificacion], [Direccion], [Telefono]) VALUES (7, N'CLI0006', N'1234567891', 1, N'Miguel Angeles Suarez', N'Masculino', 56, N'1234567891', N'Babahoyo', N'0999999999')

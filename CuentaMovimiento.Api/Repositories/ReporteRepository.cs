@@ -15,13 +15,17 @@ namespace CuentaMovimiento.Api.Repositories
 
         public async Task<IEnumerable<ReporteResponseDto>> ObtenerEstadoCuenta(ReporteRequestDto request)
         {
+            var fechaInicio = request.FechaInicio.Date;
+            var fechaFin = request.FechaFin.Date.AddDays(1);
+
             return await (
                 from c in _context.Cuentas
                 join m in _context.Movimientos
                     on c.Id equals m.CuentaId
                 where c.ClienteId == request.ClienteId
-                    && m.Fecha.Date >= request.FechaInicio.Date
-                    && m.Fecha.Date <= request.FechaFin.Date
+                    && m.Fecha >= fechaInicio
+                    && m.Fecha < fechaFin
+                orderby m.Fecha
                 select new ReporteResponseDto
                 {
                     Fecha = m.Fecha,
@@ -37,3 +41,4 @@ namespace CuentaMovimiento.Api.Repositories
         }
     }
 }
+

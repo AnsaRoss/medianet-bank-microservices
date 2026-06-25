@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{41521C5A-3312-4389-8E25-6BC14166CBC3}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		init-db.sh = init-db.sh
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -39,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDScripts", "BDScripts", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{E715E71C-B5B7-46BB-AB68-29233E5C13ED}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\and26\Downloads\_MediTest.postman_collection.json = C:\Users\and26\Downloads\_MediTest.postman_collection.json
+		..\..\..\..\Users\and26\Downloads\_MediTest.postman_collection.json = ..\..\..\..\Users\and26\Downloads\_MediTest.postman_collection.json
 	EndProjectSection
 EndProject
 Global
@@ -70,5 +72,8 @@ Global
 		{46D5EEDE-DF97-4574-8CD0-B824D4A06E34} = {FCF52204-B83F-4119-A765-B83987A8A140}
 		{2E190927-CFEE-4929-AE02-35BD7BCB6583} = {41521C5A-3312-4389-8E25-6BC14166CBC3}
 		{E715E71C-B5B7-46BB-AB68-29233E5C13ED} = {41521C5A-3312-4389-8E25-6BC14166CBC3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D59E045B-AB4E-4B93-B7F3-59F9D781A66D}
 	EndGlobalSection
 EndGlobal
