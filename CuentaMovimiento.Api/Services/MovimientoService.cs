@@ -79,6 +79,19 @@ namespace CuentaMovimiento.Api.Services
             return movimientoReverso;
         }
 
+        public async Task<Movimiento> Corregir(int id, MovimientoUpdateDto dto)
+        {
+            await Reversar(id);
+
+            var movimientoCorregido = new MovimientoCreateDto
+            {
+                CuentaId = dto.CuentaId,
+                Valor = dto.Valor
+            };
+
+            return await Crear(movimientoCorregido);
+        }
+
         private async Task<Cuenta> ObtenerCuenta(int cuentaId)
         {
             var cuenta = await _cuentaRepository.ObtenerPorId(cuentaId);

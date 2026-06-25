@@ -10,7 +10,7 @@
 
 <div class="card mb-4">
   <div class="card-header">
-    Registrar Movimiento
+    {{ movimientoEditandoId ? 'Corregir Movimiento' : 'Registrar Movimiento' }}
   </div>
 
   <div class="card-body">
@@ -23,20 +23,20 @@
             <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
               {{ cuenta.numeroCuenta }} - {{ cuenta.tipoCuenta }} - Saldo: {{ cuenta.saldoActual }}
             </option>
-            <div class="text-danger" *ngIf="movimientoForm.get('cuentaId')?.invalid && (movimientoForm.get('cuentaId')?.dirty || movimientoForm.get('cuentaId')?.touched)">
-              Seleccione una cuenta.
-            </div>
           </select>
+          <div class="text-danger" *ngIf="movimientoForm.get('cuentaId')?.invalid && (movimientoForm.get('cuentaId')?.dirty || movimientoForm.get('cuentaId')?.touched)">
+            Seleccione una cuenta.
+          </div>
         </div>
 
         <div class="col-md-3 mb-3">
           <label>Valor</label>
           <input type="number" class="form-control" formControlName="valor">
           <small class="text-muted">
-            Positivo = depósito, negativo = retiro
+            Positivo = deposito, negativo = retiro
           </small>
           <div class="text-danger" *ngIf="movimientoForm.get('valor')?.invalid && (movimientoForm.get('valor')?.dirty || movimientoForm.get('valor')?.touched)">
-            Ingrese un valor válido. Puede ser positivo o negativo.
+            Ingrese un valor valido. Puede ser positivo o negativo.
           </div>
         </div>
 
@@ -46,9 +46,55 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" type="submit" [disabled]="movimientoForm.invalid">
-        Registrar Movimiento
-      </button>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit" [disabled]="movimientoForm.invalid">
+          {{ movimientoEditandoId ? 'Guardar Correccion' : 'Registrar Movimiento' }}
+        </button>
+        <button *ngIf="movimientoEditandoId" class="btn btn-outline-secondary" type="button" (click)="cancelarEdicion()">
+          Cancelar
+        </button>
+      </div>
     </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Historial de Movimientos
+  </div>
+
+  <div class="card-body table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cuenta</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          <th>Saldo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movimiento of movimientos">
+          <td>{{ movimiento.fecha | date:'short' }}</td>
+          <td>{{ movimiento.cuentaId }}</td>
+          <td>{{ movimiento.tipoMovimiento }}</td>
+          <td>{{ movimiento.valor }}</td>
+          <td>{{ movimiento.saldo }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" type="button" (click)="editar(movimiento)">
+              Editar
+            </button>
+            <button class="btn btn-danger btn-sm" type="button" (click)="reversar(movimiento)">
+              Reversar
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="movimientos.length === 0">
+          <td colspan="6" class="text-center text-muted">No existen movimientos registrados</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -8,6 +8,7 @@ namespace CuentaMovimiento.Api.Services
         Task<IEnumerable<Movimiento>> ObtenerTodos();
         Task<Movimiento> ObtenerPorId(int id);
         Task<Movimiento> Crear(MovimientoCreateDto dto);
+        Task<Movimiento> Corregir(int id, MovimientoUpdateDto dto);
         Task<Movimiento> Reversar(int id);
     }
 }

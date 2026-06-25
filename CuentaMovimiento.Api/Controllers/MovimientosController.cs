@@ -37,9 +37,22 @@ namespace CuentaMovimiento.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = movimiento.Id }, movimiento);
         }
 
-        // Aunque el enunciado solicita CRUD sobre movimientos, por criterio financiero evite
-        // modificar transacciones historicas directamente. Para correcciones se implementa un
-        // reverso mediante un nuevo movimiento que compensa el valor original y mantiene trazabilidad.
+        // Correccion auditable: se reversa el movimiento original y se registra uno nuevo.
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Movimiento>> Put(int id, MovimientoUpdateDto dto)
+        {
+            var movimientoCorregido = await _movimientoService.Corregir(id, dto);
+            return Ok(movimientoCorregido);
+        }
+
+        // Borrado auditable: no elimina fisicamente; genera un movimiento de reverso.
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Movimiento>> Delete(int id)
+        {
+            var movimientoReverso = await _movimientoService.Reversar(id);
+            return Ok(movimientoReverso);
+        }
+
         [HttpPost("{id}/reverso")]
         public async Task<ActionResult<Movimiento>> Reversar(int id)
         {

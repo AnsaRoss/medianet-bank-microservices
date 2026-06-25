@@ -13,7 +13,19 @@ export class MovimientoService {
 
   constructor(private http: HttpClient) { }
 
+  getAll(): Observable<Movimiento[]> {
+    return this.http.get<Movimiento[]>(this.apiUrl);
+  }
+
   create(movimiento: Movimiento): Observable<any> {
     return this.http.post<any>(this.apiUrl, movimiento);
+  }
+
+  update(id: number, movimiento: Movimiento): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, movimiento);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
